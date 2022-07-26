@@ -105,7 +105,6 @@ def draw_numbers():
         col = 0
         while col<8:
             output = board[row][col]
-
             b_text = font.render((str(output)), True, pygame.Color('white'))
             SCREEN.blit(b_text, pygame.Vector2((col*blockSize)+offset, (row*blockSize)+offset-3))
             col += 1
