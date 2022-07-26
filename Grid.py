@@ -59,6 +59,7 @@ def draw_inp_box():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
+                sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 # If the user clicked on the input_box rect.
                 if input_box.collidepoint(event.pos):
@@ -72,13 +73,15 @@ def draw_inp_box():
                 if active:
                     if event.key == pygame.K_RETURN:
                         print(text)
-                        text = ''
-                    elif event.key == pygame.K_BACKSPACE:
+                        text = ""
+                    if event.key == pygame.K_BACKSPACE:
                         text = text[:-1]
+
                     else:
                         text += event.unicode
 
-        ##SCREEN.fill((30, 30, 30))
+        SCREEN.fill((30, 30, 30))
+        ##draw_inp_box()
         # Render the current text.
         txt_surface = font.render(text, True, color)
         # Resize the box if the text is too long.
