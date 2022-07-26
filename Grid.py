@@ -4,7 +4,7 @@ import pygame
 
 BLACK = (0, 0, 0)
 WHITE = (200, 200, 200)
-WINDOW_HEIGHT = 500
+WINDOW_HEIGHT = 600
 WINDOW_WIDTH = 500
 board =[[random.randrange(0, 2, 1) for i in range(8)]for j in range (10)]
 
@@ -42,14 +42,14 @@ def draw_numbers():
     font = pygame.font.SysFont('bookantigua', 28, True, False)
     row = 0
     blockSize = 50
-
+    offset = 20
     while row < 8:
         col = 0
         while col<8:
             output = board[row][col]
 
             b_text = font.render((str(output)), True, pygame.Color('white'))
-            SCREEN.blit(b_text, pygame.Vector2((col*blockSize, row*blockSize)))
+            SCREEN.blit(b_text, pygame.Vector2((col*blockSize)+offset, (row*blockSize)+offset-3))
             col += 1
         row += 1
 
