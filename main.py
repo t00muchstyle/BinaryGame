@@ -1,5 +1,5 @@
 
-from BinaryConverterGame.Game import BinaryGame
+from Game import BinaryGame
 
 game = BinaryGame()
 
