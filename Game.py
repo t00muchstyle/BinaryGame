@@ -1,9 +1,8 @@
 
 import pygame
-from BinaryConverterGame.menu import MainMenu
+from menu import MainMenu
 
 class BinaryGame():
-
     def __init__(self):
         self.running, self.playing = True, False
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY = False, False, False, False

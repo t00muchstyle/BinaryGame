@@ -34,7 +34,7 @@ class MainMenu(menu):
             self.game.check_events()
             self.check_input()
             self.game.display.fill(self.game.BLACK)
-            self.game.draw_text("Main menu.py", 20, self.game.DISPLAY_WIDTH / 2, self.game.DISPLAY_HEIGHT - 20)
+            self.game.draw_text("Main menu", 20, self.game.DISPLAY_WIDTH / 2, self.game.DISPLAY_HEIGHT - 20)
             self.game.draw_text("Start Game", 20, self.startx, self.starty)
             self.game.draw_text("Options", 20, self.optionsx, self.optionsy)
             self.game.draw_text("Credits", 20, self.creditsx, self.creditsy)
