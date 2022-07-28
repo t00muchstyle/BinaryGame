@@ -38,7 +38,7 @@ def drawGrid():
             rect = pygame.Rect(x*blockSize, y*blockSize,
                                blockSize, blockSize)
             pygame.draw.rect(SCREEN, WHITE, rect, 1)
-
+    #draw_inp_box()
 
 def draw_inp_box():
 
@@ -71,10 +71,12 @@ def draw_inp_box():
                 color = color_active if active else color_inactive
             if event.type == pygame.KEYDOWN:
                 if active:
+                    pygame.key.start_text_input()
                     if event.key == pygame.K_RETURN:
+                        pygame.key.stop_text_input()
                         print(text)
-                        text = ""
-                    if event.key == pygame.K_BACKSPACE:
+                        text = ''
+                    elif event.key == pygame.K_BACKSPACE:
                         text = text[:-1]
 
                     else:
