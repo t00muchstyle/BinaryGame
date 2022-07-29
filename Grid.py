@@ -82,7 +82,7 @@ def draw_inp_box():
                     else:
                         text += event.unicode
 
-        SCREEN.fill((30, 30, 30))
+        ##SCREEN.fill((30, 30, 30))
         ##draw_inp_box()
         # Render the current text.
         txt_surface = font.render(text, True, color)
