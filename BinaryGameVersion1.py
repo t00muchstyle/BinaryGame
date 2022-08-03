@@ -18,7 +18,7 @@ pygame.display.set_caption("Binary Game")
 #set up speed of the game and frames per second 
 
 FPS = 60
-Milliseconds = 60
+milliseconds = 60
 score = 0 
 Time = 120
 # the following vaiables help split up the binary numbers and animate
@@ -33,4 +33,11 @@ G_6 = False
 G_7 = False 
 G_8 = False
 
-#
+#initialising fonts 
+binaryFont = pygame.font.SysFont('arial',45)
+#adding background image to window
+gameBG = pygame.image.load("binary.jpg")
+#setting background image to display properly 
+gameBG = pygame.transform.scale(gameBG,(WIDTH,HEIGHT))
+
+decimalEntryBoxY = 1040
