@@ -156,7 +156,7 @@ def which_class_student(txt):
         MENU_RECT = MENU_TEXT.get_rect(center=(1150, 80))
         SCREEN.blit(MENU_TEXT, MENU_RECT)
 
-        OPTIONS_BACK = Button(image=None, pos=(70, 40), 
+        OPTIONS_BACK = Button(image=None, pos=(40, 40), 
                                 text_input="BACK", font=get_font(35), base_color="RED", hovering_color="Green")
 
         OPTIONS_BACK.changeColor(OPTIONS_MOUSE_POS)
@@ -570,7 +570,7 @@ def login():
         MENU_RECT = MENU_TEXT.get_rect(center=(400, 320))
         SCREEN.blit(MENU_TEXT, MENU_RECT)
 
-        PLAY_BACK = Button(image=None, pos=(90, 400), 
+        PLAY_BACK = Button(image=None, pos=(300, 700), 
                             text_input="BACK", font=get_font(35), base_color="black", hovering_color="Green")
         
         LOGIN_BUTTON = Button(image=pygame.image.load("assets/Options Rect.png"), pos=(640, 500), 
@@ -653,7 +653,7 @@ def register(T_OR_S):
             REGISTER_BUTTON.changeColor(OPTIONS_MOUSE_POS)
             REGISTER_BUTTON.update(SCREEN)
 
-        OPTIONS_BACK = Button(image=None, pos=(90, 300), 
+        OPTIONS_BACK = Button(image=None, pos=(250, 700), 
                                 text_input="BACK", font=get_font(35), base_color="Black", hovering_color="Green")
 
         OPTIONS_BACK.changeColor(OPTIONS_MOUSE_POS)
