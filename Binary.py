@@ -4,11 +4,12 @@ import random as r
 import time
 import sqlite3 as sq
 from menu import use_username,level_button
-
+from menu import *
 
 
 
 # Checking which level should be played
+# sets the binary digits needed for that level
 level = level_button
 level2 = 0 
 level3 = 0
@@ -63,6 +64,7 @@ G_5=False
 G_6=False
 G_7=False
 G_8=False
+G_9=False
 
 # Millisecond to be converted into seconds
 Milliseconds=60
@@ -136,14 +138,17 @@ class Binary_boxes:
 
     # Function to display boxes
     def create(self,event,G):
-        global Box_y,G_1,G_2,G_3,G_4,G_5,G_6,G_7,G_8
+        global Box_y,G_1,G_2,G_3,G_4,G_5,G_6,G_7,G_8,G_9
         # Checking which key pressed
         key=pygame.key.get_pressed()
         x,y = pygame.mouse.get_pos()
         self.NameBox = pygame.Rect(500,self.Box_y,90,50)
         
+            
         if self.NameBox.collidepoint(x,y):
+
             if event.type== pygame.KEYUP:
+                G_9=False
                 self.button=True
             elif key[pygame.K_1] and self.button:
                 self.text=self.text+'1'
@@ -232,6 +237,7 @@ class Binary_boxes:
             G_6=True
             G_7=True
             G_8=True
+            G_9=True
             Box_y+=60
 
             # Playing sound
@@ -244,6 +250,7 @@ class Binary_boxes:
             G_6=True
             G_7=True
             G_8=True
+            G_9=True
             self.text=''
             
             self.G=True
@@ -257,6 +264,7 @@ class Binary_boxes:
             G_6=True
             G_7=True
             G_8=True
+            G_9=True
             self.text=''
             self.G=True
             Box_y+=60
@@ -269,6 +277,7 @@ class Binary_boxes:
             G_6=True
             G_7=True
             G_8=True
+            G_9=True
             self.text=''
             self.G=True
             Box_y+=60
@@ -281,6 +290,7 @@ class Binary_boxes:
             G_6=True
             G_7=True
             G_8=True
+            G_9=True
             self.text=''
             self.G=True
             Box_y+=60
@@ -294,6 +304,7 @@ class Binary_boxes:
             G_7=True
             G_8=True
             G_1=True
+            G_9=True
             self.text=''
             self.G=True
             Box_y+=60
@@ -307,6 +318,7 @@ class Binary_boxes:
             G_5=True
             G_3=True
             G_1=True
+            G_9=True
             self.text=''
             self.G=True
             Box_y+=60
@@ -320,10 +332,15 @@ class Binary_boxes:
             G_5=True
             G_3=True
             G_1=True
+            G_9=True
             self.text=''
             self.G=True
             Box_y+=60
             pygame.mixer.Channel(1).play(pygame.mixer.Sound('assets/win.wav'))
+
+        if G_9:
+            self.text=''
+        
 # # Driver code
 # NameBox = pygame.Rect(50,70,250,50)
 # textBox = pygame.Rect(225,150,250,50)
@@ -367,18 +384,22 @@ def window(event,first,second,Third,fourth,fifth,sixth,seventh,eighth):
 
 # Function which saves data at the end and the gameover screen
 def gameover(No_times,realtime):
-    No_times+=1
+    
     clock=pygame.time.Clock()
-    clock.tick(8)
-    Over_text = Binary_font.render("Game Over!",1,"WHITE")
-    WIN.blit(Over_text,(150,280))
-    pygame.display.update()
-    clock.tick(8)
-    Over_text = Binary_font.render("Game Over!",1,"RED")
-    WIN.blit(Over_text,(150,280))
+    No_times = No_times
+    realtime = realtime
    
     pygame.display.update()
-    if No_times==10:
+
+    while No_times!=10:
+        clock.tick(8)   
+        Over_text = Binary_font.render("Game Over!",1,"WHITE")
+        WIN.blit(Over_text,(150,280))
+        pygame.display.update()
+        clock.tick(8)
+        Over_text = Binary_font.render("Game Over!",1,"RED")
+        WIN.blit(Over_text,(150,280))
+        No_times+=1
         Score_text = Binary_font.render("You score is",1,'RED')
         WIN.blit(Score_text,(150,340))
         pygame.display.update()
@@ -417,10 +438,18 @@ def gameover(No_times,realtime):
                     db.execute(insert)
                     db.commit()
                     break
+    
         time.sleep(3)
-        pygame.quit()
         
-    gameover(No_times,realtime)
+        #import Binary
+        
+        
+        
+        #main()
+        
+        
+        
+    #gameover(No_times,realtime)
 
 # Main function which begins everything
 def main():
@@ -460,7 +489,7 @@ def main():
             if level<=4:
                 first = Binary_boxes(0,r.randint(0,level4),r.randint(0,level3),r.randint(0,level2),r.randint(0,1),r.randint(0,1),r.randint(0,1),r.randint(0,1))
             elif level == 5:
-                first = Binary_boxes(0,0,0,0,list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)])
+                first = Binary_boxes(0,0,0,0,0,0,list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)])
             first.G=False
             interval=Time
             interval-=inter_range
@@ -469,7 +498,7 @@ def main():
             if level <= 4:
                 second = Binary_boxes(0,r.randint(0,level4),r.randint(0,level3),r.randint(0,level2),r.randint(0,1),r.randint(0,1),r.randint(0,1),r.randint(0,1))
             elif level == 5:
-                second = Binary_boxes(0,0,0,0,list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)])
+                second = Binary_boxes(0,0,0,0,0,0,list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)])
             second.G=False
             interval=Time
             interval-=inter_range
@@ -478,7 +507,7 @@ def main():
             if level <= 4:
                 Third = Binary_boxes(0,r.randint(0,level4),r.randint(0,level3),r.randint(0,level2),r.randint(0,1),r.randint(0,1),r.randint(0,1),r.randint(0,1))
             elif level == 5:
-                Third = Binary_boxes(0,0,0,0,list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)])
+                Third = Binary_boxes(0,0,0,0,0,0,list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)])
             Third.G=False
             interval=Time
             interval-=inter_range
@@ -487,7 +516,7 @@ def main():
             if level <= 4:
                 Fourth = Binary_boxes(0,r.randint(0,level4),r.randint(0,level3),r.randint(0,level2),r.randint(0,1),r.randint(0,1),r.randint(0,1),r.randint(0,1))
             elif level == 5:
-                Fourth = Binary_boxes(0,0,0,0,list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)])
+                Fourth = Binary_boxes(0,0,0,0,0,0,list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)])
             Fourth.G=False
             interval=Time
             interval-=inter_range
@@ -496,7 +525,7 @@ def main():
             if level <= 4:
                 Fifth = Binary_boxes(0,r.randint(0,level4),r.randint(0,level3),r.randint(0,level2),r.randint(0,1),r.randint(0,1),r.randint(0,1),r.randint(0,1))
             elif level == 5:
-                Fifth = Binary_boxes(0,0,0,0,list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)])
+                Fifth = Binary_boxes(0,0,0,0,0,0,list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)])
             Fifth.G=False
             interval=Time
             interval-=inter_range
@@ -505,7 +534,7 @@ def main():
             if level <= 4:
                 sixth = Binary_boxes(0,r.randint(0,level4),r.randint(0,level3),r.randint(0,level2),r.randint(0,1),r.randint(0,1),r.randint(0,1),r.randint(0,1))
             elif level == 5:
-                sixth = Binary_boxes(0,0,0,0,list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)])
+                sixth = Binary_boxes(0,0,0,0,0,0,list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)])
             sixth.G=False
             interval=Time
             interval-=inter_range
@@ -514,7 +543,7 @@ def main():
             if level <= 4:
                 seventh = Binary_boxes(0,r.randint(0,level4),r.randint(0,level3),r.randint(0,level2),r.randint(0,1),r.randint(0,1),r.randint(0,1),r.randint(0,1))
             elif level == 5:
-                seventh = Binary_boxes(0,0,0,0,list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)])
+                seventh = Binary_boxes(0,0,0,0,0,0,list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)])
             seventh.G=False
             interval=Time
             interval-=inter_range
@@ -523,16 +552,18 @@ def main():
             if level <= 4:
                 eighth = Binary_boxes(0,r.randint(0,level4),r.randint(0,level3),r.randint(0,level2),r.randint(0,1),r.randint(0,1),r.randint(0,1),r.randint(0,1))
             elif level == 5:
-                eighth = Binary_boxes(0,0,0,0,list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)])
+                eighth = Binary_boxes(0,0,0,0,0,0,list_of_hex[r.randint(0,15)],list_of_hex[r.randint(0,15)])
             eighth.G=False
             interval=Time
             interval-=inter_range
 
         elif Time==interval:
-            gameover(0,score)
+            gameover(0,score,window(otherevent,first,second,Third,Fourth,Fifth,sixth,seventh,eighth))
+            
 
         elif Time==0:
-            gameover(0,score)
+            gameover(0,score,window(otherevent,first,second,Third,Fourth,Fifth,sixth,seventh,eighth))
+            
 
         # increasing score and recalling when one problem is solved
         if G_1:
@@ -569,6 +600,7 @@ def main():
             eighth.Box_y+=60   
             G_8=False  
             score+=1
+            
        
         window(otherevent,first,second,Third,Fourth,Fifth,sixth,seventh,eighth)
 
